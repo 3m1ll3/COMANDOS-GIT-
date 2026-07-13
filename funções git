@@ -1,0 +1,288 @@
+1 - CONFIGURAÇÃO INICIAL
+VERIFICAR VERSAO
+git --version 
+O que faz:
+Mostra a versão do Git instalada.
+
+CONFIGURA NOME
+git config --global user.name "Seu Nome"
+O que faz:
+Define o nome que aparecerá em todos os commits.
+
+CONFIGURA E-MAIL
+git config --global user.email "email@email.com"
+O que faz:
+Define o e-mail usado nos commits.
+
+VER CONFIGURAÇÕES
+git config --list
+O que faz:
+Mostra todas as configurações do Git
+
+2 - CRIANDO REPOSITORIO 
+
+INICIALIZAR GIT
+git init
+O que faz:
+Cria um repositório Git na pasta atual.
+
+CLONAR UM PROJETO
+git clone URL
+
+Exemplo:
+git clone https://github.com/usuario/projeto.git
+O que faz:
+Baixa o projeto
+Cria a pasta
+Conecta ao GitHub
+Baixa todo o histórico
+
+3 - VERIFICANDO ARQUIVOS
+
+STATUS
+git status
+O que faz:
+Mostra:
+arquivos modificados
+arquivos novos
+arquivos preparados
+branch atual
+(É provavelmente o comando mais usado.)
+
+HISTORICO RESUMIDO
+git log --oneline
+Mostra:
+7f6d123 Atualização
+abc345 Correção
+
+HISTORICO COMPLETO
+git log
+Mostra:
+autor
+data
+mensagem
+hash
+
+HISTORICO GRAFICO
+git log --graph --oneline --all
+Mostra os "galhos" das branches.
+
+4 PREPARANDO ARQUIVOS
+
+PREPARAR UM ARQUIVO
+git add arquivo.txt
+O que faz:
+Move o arquivo para a área de preparação (staging).
+Ainda NÃO salva.
+
+PREPARAR TUDO
+git add .
+O que faz:
+Prepara TODOS os arquivos modificados da pasta atual e subpastas para o próximo commit.
+É como dizer:
+"Essas alterações farão parte do próximo salvamento."
+Ainda não envia para o GitHub.
+
+ PREPARAR TUDO (INCLUINDO EXTENSÕES)
+git add -A
+Também prepara arquivos apagados.
+
+5 - SALVANDO ALTERAÇÕES
+
+COMMIT
+git commit -m "Corrigido login"
+O que faz:
+Cria um ponto de salvamento do projeto.
+Pense como:
+"Salvar jogo"
+Mas ainda apenas no computador.
+
+COMMIT AUTOMATÍCO
+git commit -am "Correção"
+O que faz:
+Equivale a:
+git add arquivos_modificados
+git commit
+Não adiciona arquivos novos.
+
+6- ENVIANDO PARA O GITHUB
+
+PRIMEIRO ENVIO
+git push -u origin main
+O que faz:
+Envia a branch para o GitHub e cria o vínculo com ela.
+Depois disso basta:
+git push
+
+ENVIAR ALTERAÇÕES
+git push
+O que faz:
+Envia os commits locais para o GitHub.
+
+7 - BAIXANDO ALTERAÇÕES
+
+ATUALIZAR PROJETO
+git pull
+O que faz:
+Faz duas coisas:
+baixa alterações
+tenta mesclar automaticamente.
+Na prática:
+git fetch
++
+git merge
+
+BAIXAR SEM JUNTAR
+git fetch
+O que faz:
+Baixa as alterações mas não modifica seus arquivos.
+
+8 - BRANCHES
+
+VER BRANCHES
+git branch
+
+CRIAR BRANCHR
+git branch ****** ("*" => NOME DA BRANCHE)
+Cria mas não entra nela.
+
+ENTRAR EM UMA BRANCH
+git branch ******
+Cria mas não entra nela.
+
+CRIAR E ENTRAR EM UMA BRANCH
+git checkout -b ******
+ou
+git switch -c ******
+
+TROCAR DE BRANCH
+git switch main
+
+EXCLUIR BRANCH
+git branch -d ******
+
+FORÇAR EXCLUSÃO
+git branch -D ******
+
+9 - MESCLANDO BRANCHES
+MERGE
+git merge ******
+O que faz:
+Junta a branch ****** na branch atual.
+
+10 - TRABALHANDO COM GITHUB
+VER REMOTO
+git remote -v
+Mostra:
+origin https://github...
+
+ADICIONAR REMOTO
+git remote add origin URL
+
+ALTERAR REMOTO
+git remote set-url origin NOVA_URL
+
+11 - DESFAZENDO ERROS
+
+TIRAR DO GIT ADD .
+git restore --staged arquivo
+
+Remove do staging.
+
+RESTALRAR ARQUIVOS
+git restore arquivo
+Descarta alterações não commitadas.
+
+APAGAR ALTERAÇÕES
+git checkout -- arquivo
+
+Comando antigo equivalente.
+
+12 - RESET
+VOLTAR UM COMMIT
+git reset --soft HEAD~1
+Apaga o commit mas mantém os arquivos preparados.
+
+RESET MISTO
+git reset HEAD~1
+Remove o commit e tira os arquivos do staging, mantendo as alterações.
+
+RESET COMPLETO
+git reset --hard HEAD~1
+Cuidado!
+Apaga o commit e também todas as alterações.
+
+13 - RECUPERAÇÃO
+
+VER HISTORICO DE MOVIMENTOS
+git reflog
+É a "caixa-preta" do Git, útil para recuperar commits perdidos.
+
+14 - COMPARAÇÃO
+
+VER DIFERENÇAS
+git diff
+Mostra alterações ainda não preparadas.
+
+COMPARAR COMMITS
+git diff hash1 hash2
+
+15 - STASH
+Guardar alterações temporariamente.
+
+GUARDAR
+git stash
+
+VER LISTA
+git stash list
+
+RECUPERAR
+git stash pop
+
+APLICAR SEM APAGAR
+git stash apply
+
+16 - TAGS
+
+CRIAR VERSÕES
+git tag v1.0
+
+ENVIAR:
+git push origin v1.0
+
+17 - REBASE
+
+git rebase main
+O que faz:
+Reescreve o histórico para colocar seus commits "por cima" da branch de destino, mantendo um histórico linear.
+
+18 - CHERRY PICK
+git cherry-pick HASH
+O que faz:
+Copia um commit específico de outra branch.
+
+19 - LIMPEZA
+
+VER ARQUIVOS IGNORADOS:
+git clean -n
+
+APAGAR ARQUIVOS NÃO RASTREADOS:
+git clean -f
+
+20 - INSPEÇÃO
+
+QUEM MODIFICOU UM ARQUIVO:
+git blame arquivo
+
+VER CONTEUDO DE UM COMMMIT:
+git show HASH
+
+FLUXO DE TRABALHO MAIS COMUM
+git status          # Ver o que mudou
+git add .           # Preparar alterações
+git commit -m "Mensagem"  # Salvar um ponto no histórico
+git push            # Enviar para o GitHub
+
+PARA ATUALIZAR UM PROJETO COM ALTERAÇÕES DO REPOSITORIO REMOTO:
+
+git pull            # Baixar e mesclar alterações do GitHub
